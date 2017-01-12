@@ -1,0 +1,44 @@
+{
+  "name": "cycle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch:js": "watchify src/client.js -o public/bundle.js -t [ babelify --presets [es2015] ]",
+    "watch:css": "node-sass -w src/scss/style.scss public/bundle.css",
+    "watch:server": "babel-watch src/server.js",
+    "watch": "npm run watch:js & npm run watch:css & npm run watch:server",
+    "build:js": "browserify src/client.js -o public/bundle.min.js -t [ babelify --presets [es2015] ] -p [ minifyify --no-map ]",
+    "build:css": "node-sass src/scss/style.scss public/bundle.css && postcss --use autoprefixer public/bundle.css | cleancss > public/bundle.min.css",
+    "build:server": "babel src -d dist --presets es2015",
+    "build": "npm run build:js && npm run build:css && npm run build:server",
+    "start": "node dist/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cycle/dom": "^14.3.0",
+    "@cycle/history": "^4.1.0",
+    "@cycle/http": "^11.2.0",
+    "@cycle/isolate": "^1.4.0",
+    "@cycle/xstream-run": "^4.2.0",
+    "debug": "^2.6.0",
+    "express": "^4.14.0",
+    "history": "^3.0.0",
+    "route-recognizer": "^0.2.9",
+    "xstream": "^9.3.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.6.1",
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-watch": "^2.0.5",
+    "babelify": "^7.3.0",
+    "browserify": "^13.3.0",
+    "clean-css": "^3.4.23",
+    "minifyify": "^7.3.4",
+    "node-sass": "^4.2.0",
+    "postcss-cli": "^2.6.0",
+    "watchify": "^3.8.0"
+  }
+}
