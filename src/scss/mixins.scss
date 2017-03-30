@@ -1,0 +1,109 @@
+@import 'variables';
+
+@mixin container() {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $container-max-width;
+  width: $container-width;
+}
+
+@mixin sm {
+  @media (min-width: #{$sm-width}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$md-width}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$lg-width}) {
+    @content;
+  }
+}
+
+@mixin row() {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin columns($wrap: false) {
+  @if $wrap {
+    @include row();
+    flex-wrap: wrap;
+    justify-content: center;
+    &>* {
+      margin: 20px;
+    }
+  } @else {
+    @include row();
+    &>* {
+      flex: 1;
+    }
+    &>*+* {
+      margin-left: 20px;
+    }
+  }
+}
+
+@mixin dark() {
+  color: rgba(255, 255, 255, 0.7);
+  .title, h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+  }
+  .subtitle {
+    color: hsla(0, 0%, 100%, .55);
+  }
+}
+
+@mixin light() {
+  color: #333;
+  .title, h1, h2, h3, h4, h5, h6 {
+    color: #333;
+  }
+  .subtitle {
+    color: rgba(36, 36, 36, 0.6);
+  }
+}
+
+@mixin button() {
+  display: inline-block;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 15px 50px 11px;
+  background-color: $pink;
+  text-align: center;
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 500;
+  border: 0;
+  border-bottom: 4px solid $pink;
+  outline: 0;
+  text-decoration: none;
+  cursor: pointer;
+  letter-spacing: 0.7px;
+  transition: border-color .2s cubic-bezier(0.23, 1, 0.32, 1);
+  &:hover {
+    border-color: $pink-dark;
+  }
+  &[disabled] {
+    color: $pink-dark;
+  }
+}
+
+@mixin spacing($amount) {
+  h1, h2, h3, h4, h5, h6, p, .button, label, input, img, ul {
+    margin-top: $amount;
+    margin-bottom: $amount;
+  }
+}
